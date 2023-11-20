@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,10 +8,23 @@ import KFilmScreen from './pages/KFilmScreen';
 import KDramaDetailScreen from './pages/KDramaDetailScreen';
 import KFilmDetailScreen from './pages/KFilmDetailScreen';
 import AboutScreen from './pages/AboutScreen';
+import SplashScreen from './pages/SplashScreen';
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  if (isLoading) {
+    return <SplashScreen />;
+  }
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -49,4 +62,6 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;
